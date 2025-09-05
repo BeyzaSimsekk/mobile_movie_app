@@ -18,6 +18,13 @@ module.exports = {
         },
         accent: "#AB8BFF",
       },
+      fontFamily: {
+        lexend: ["Lexend-Regular", "sans-serif"],
+        "lexend-bold": ["Lexend-Bold", "sans-serif"],
+        "lexend-semibold": ["Lexend-SemiBold", "sans-serif"],
+        "lexend-light": ["Lexend-Light", "sans-serif"],
+        "lexend-medium": ["Lexend-Medium", "sans-serif"],
+      },
     },
   },
   plugins: [],
