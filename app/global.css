@@ -29,4 +29,10 @@
   .search-bar {
     @apply flex-row items-center bg-dark-200 rounded-full px-5 py-3;
   }
+  .vote-text {
+    @apply text-xs text-white font-bold uppercase;
+  }
+  .released-date-text {
+    @apply text-xs text-light-300 font-medium mt-1;
+  }
 }
