@@ -16,7 +16,7 @@ export default function Index() {
     data: movies, 
     loading: moviesLoading, 
     error: moviesError} 
-    = useFetch( () => fetchMovies({query:""})) //SEARCH SCREEN DE KALDIM*******1.45.59*********
+    = useFetch( () => fetchMovies({query:""}))
 
   return (
     <View className="flex-1 bg-primary">
