@@ -10,6 +10,7 @@ import { ActivityIndicator, FlatList, Image, Text, View } from 'react-native'
 const search = () => {
 
     const [searchQuery, setSearchQuery] = useState('');
+    const [showEmptyMessage, setShowEmptyMessage] = useState(false);
   
     const {
       data: movies, 
@@ -35,13 +36,18 @@ const search = () => {
 
         if(searchQuery.trim()) {
           await loadMovies();
+          setShowEmptyMessage(true); // sadece sorgu varsa göster
         } else{
           reset();
+          setShowEmptyMessage(false); // boş sorguda mesajı gizle
         }
 
       }, 500)
 
-      return () => clearTimeout(timeOutId); // with this we can prevent memory leak
+      return () => {
+        clearTimeout(timeOutId);
+        setShowEmptyMessage(false); // yeni karakter girildiğinde mesajı hemen gizle
+      } // with this we can prevent memory leak
     },[searchQuery]);
 
   return (
@@ -96,14 +102,23 @@ const search = () => {
         }
         ListEmptyComponent={
           !loading && !error ? (
-            <View className='mt-10 px-5'>
-              <Text className='text-center text-gray-500'>
-                {searchQuery.trim() ? 'No movies found' : 'Search for a movie '}
+            <View className='flex-1 justify-center items-center mt-10'>
+            {searchQuery.trim() ? (movies?.length === 0 && showEmptyMessage && (
+              <Text className='text-center text-gray-500 text-lg'>
+                No movies found
               </Text>
+          )
+            ) : (
+              <Image
+                source={icons.SearchBg}
+                className='w-20 h-20 opacity-40'
+                resizeMode='contain'
+              />
+            )}
             </View>
           ) : null
         }
-      />
+/>
     </View>
   )
 }
