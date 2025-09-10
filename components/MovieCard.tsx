@@ -20,7 +20,7 @@ const MovieCard = ({id, poster_path, title, vote_average, release_date}:Movie) =
             {/* Rating */}
             <View className='flex-row items-center justify-start gap-x-1'>
                 <Image source={icons.star} className='size-4'/>
-                <Text className='vote-text'>{Math.round(vote_average / 2)}</Text>
+                <Text className='vote-text'>{Math.round(vote_average)}</Text>
             </View>
 
             <View className='flex-row items-center justify-between'>
