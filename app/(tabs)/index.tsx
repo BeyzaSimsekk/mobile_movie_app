@@ -7,7 +7,8 @@ import { fetchMovies } from "@/services/api";
 import { getTrendingMovies } from "@/services/appwrite";
 import useFetch from "@/services/useFetch";
 import { useRouter } from "expo-router";
-import { ActivityIndicator, FlatList, Image, ScrollView, Text, View } from "react-native";
+import { useCallback, useState } from "react";
+import { ActivityIndicator, FlatList, Image, RefreshControl, ScrollView, Text, View } from "react-native";
 
 
 export default function Index() {
@@ -17,14 +18,29 @@ export default function Index() {
   const {
     data: trendingMovies,
     loading: trendingLoading,
-    error: trendingError
+    error: trendingError,
+    refetch: refetchTrending,
   } = useFetch(getTrendingMovies);
 
   const {
     data: movies, 
     loading: moviesLoading, 
-    error: moviesError} 
-    = useFetch( () => fetchMovies({query:""}))
+    error: moviesError,
+    refetch: refetchMovies,
+  } = useFetch( () => fetchMovies({query:""}))
+
+  const [refreshing, setRefreshing] = useState(false);
+
+  const onRefresh = useCallback(async () => {
+    setRefreshing(true);
+    try {
+      await Promise.all([refetchTrending(), refetchMovies()]);
+    } catch (err) {
+      console.error("Refresh error:", err);
+    } finally {
+      setRefreshing(false);
+    }
+  }, [refetchTrending, refetchMovies]);
 
   return (
     <View className="flex-1 bg-primary">
@@ -33,13 +49,22 @@ export default function Index() {
         className="flex-1 px-5" 
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{minHeight:"100%", paddingBottom: 10}}
+        refreshControl={
+          <RefreshControl 
+            refreshing={refreshing} 
+            onRefresh={onRefresh} 
+            tintColor="#0000FF"
+            colors={["#AB8BFF", "#FFD700", "#00FF00"]}
+            progressBackgroundColor="#1E1E2D"
+          />
+        }
       >
         <Image source={icons.logo} className="home-logo"/>
 
         {moviesLoading || trendingLoading ? (
           <ActivityIndicator 
             size="large"
-            color="#0000FF"
+            color="#AB8BFF"
             className="mt-10 self-center"
           />
         ) : moviesError || trendingError ? (
