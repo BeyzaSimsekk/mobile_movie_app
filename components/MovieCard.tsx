@@ -15,7 +15,7 @@ const MovieCard = ({id, poster_path, title, vote_average, release_date}:Movie) =
                 className='w-full h-52 rounded-lg'
                 resizeMode='cover'
             />
-            <Text className='text-sm font-bold text-white mt-2' numberOfLines={1}>{title}</Text>
+            <Text className='movie_card-title' numberOfLines={1}>{title}</Text>
 
             {/* Rating */}
             <View className='flex-row items-center justify-start gap-x-1'>

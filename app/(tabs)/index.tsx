@@ -3,6 +3,7 @@ import SearchBar from "@/components/SearchBar";
 import { icons } from "@/constants/icons";
 import { images } from "@/constants/images";
 import { fetchMovies } from "@/services/api";
+import { getTrendingMovies } from "@/services/appwrite";
 import useFetch from "@/services/useFetch";
 import { useRouter } from "expo-router";
 import { ActivityIndicator, FlatList, Image, ScrollView, Text, View } from "react-native";
@@ -11,6 +12,12 @@ import { ActivityIndicator, FlatList, Image, ScrollView, Text, View } from "reac
 export default function Index() {
 
   const router = useRouter(); 
+
+  const {
+    data: trendingMovies,
+    loading: trendingLoading,
+    error: trendingError
+  } = useFetch(getTrendingMovies);
 
   const {
     data: movies, 
@@ -28,14 +35,14 @@ export default function Index() {
       >
         <Image source={icons.logo} className="home-logo"/>
 
-        {moviesLoading ? (
+        {moviesLoading || trendingLoading ? (
           <ActivityIndicator 
             size="large"
             color="#0000FF"
             className="mt-10 self-center"
           />
-        ) : moviesError ? (
-          <Text>Error: {moviesError?.message}</Text>
+        ) : moviesError || trendingError ? (
+          <Text>Error: {moviesError?.message || trendingError?.message}</Text>
         ) : (
           <View>
             <View className="flex-1 mt-5">
@@ -44,8 +51,25 @@ export default function Index() {
             placeholder="Search for a movie"
           />
 
+          {trendingMovies && (
+            <View className="mt-10">
+              <Text className="header-trending">Trending Movies</Text>
+              <FlatList
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                ItemSeparatorComponent={() => <View className="w-4"/>}
+                className="mb-4 mt-3"
+                data={trendingMovies}
+                renderItem={({item, index}) => (
+                  <Text className="text-white text-sm">{item.title}</Text>
+                )}
+                keyExtractor={(item) => item.movie_id.toString()}
+              />
+            </View>
+          )}
+
           <>
-            <Text className="text-lg text-white font-bold mt-5 mb-3">Latest Movies</Text>
+            <Text className="header-latest font-lexend-bold">Latest Movies</Text>
 
              <FlatList
                 data = {movies}

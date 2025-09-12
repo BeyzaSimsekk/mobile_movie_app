@@ -29,10 +29,19 @@
   .search-bar {
     @apply flex-row items-center bg-dark-200 rounded-full px-5 py-3;
   }
+  .movie_card-title {
+    @apply text-sm font-lexend-medium text-white mt-2;
+  }
   .vote-text {
-    @apply text-xs text-white font-bold uppercase;
+    @apply text-xs text-white font-lexend-bold uppercase;
   }
   .released-date-text {
     @apply text-xs text-light-300 font-medium mt-1;
+  }
+  .header-latest {
+    @apply text-3xl text-white mt-5 mb-3 font-lexend-bold;
+  }
+  .header-trending {
+    @apply text-3xl text-white mb-3 font-lexend-bold;
   }
 }

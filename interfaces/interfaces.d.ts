@@ -79,6 +79,6 @@ interface TrendingCardProps {
 interface Props {
   placeholder: string;
   onPress?: () => void;
-  value: string;
-  onChangeText: (text: string) => void;
+  value?: string;
+  onChangeText?: (text: string) => void;
 }

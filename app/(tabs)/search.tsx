@@ -55,7 +55,7 @@ const search = () => {
 
     // Yeni useEffect: movies güncellenince tetiklenir
     useEffect(() => {
-        if (searchQuery.trim() && movies?.length > 0) {
+        if (movies?.length > 0 && movies?.[0]) {
           updateSearchCount(searchQuery, movies[0]);
         }
       }, [movies]);
