@@ -32,6 +32,15 @@
   .movie_card-title {
     @apply text-sm font-lexend-medium text-white mt-2;
   }
+  .trending_card-index {
+    @apply absolute bottom-9 -left-3.5 px-2 py-1 rounded-full;
+  }
+  .index-text {
+    @apply font-lexend-bold text-white text-6xl;
+  }
+  .trending_card-title {
+    @apply text-sm font-lexend-bold mt-2 text-light-200;
+  }
   .vote-text {
     @apply text-xs text-white font-lexend-bold uppercase;
   }
