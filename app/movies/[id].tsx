@@ -1,11 +1,14 @@
 import React from 'react'
-import { Text, View } from 'react-native'
+import { StatusBar, Text, View } from 'react-native'
 
 const MovieDetails = () => {
   return (
-    <View>
-      <Text>MovieDetails</Text>
-    </View>
+    <>
+    <StatusBar hidden={true} />
+      <View>
+        <Text>MovieDetails</Text>
+      </View>
+    </>
   )
 }
 

@@ -21,7 +21,7 @@
     @apply flex flex-row w-full flex-1 min-w-[113px] min-h-16 mt-4 justify-center items-center rounded-full overflow-hidden;
   }
   .navbar-text {
-    @apply text-secondary text-base font-semibold ml-2 font-lexend-semibold;
+    @apply text-secondary text-base ml-2 font-lexend-semibold;
   }
   .home-logo {
     @apply w-12 h-10 mt-20 mb-5 mx-auto;

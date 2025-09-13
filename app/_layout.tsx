@@ -1,5 +1,6 @@
 import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
+import { StatusBar } from "react-native";
 import "./global.css";
 
 export default function RootLayout() {
@@ -12,15 +13,39 @@ export default function RootLayout() {
     "Lexend-Light": require('../assets/fonts/Lexend-Light.ttf'),
   });
 
-  return <Stack>
-    <Stack.Screen 
-    name="(tabs)"
-    options={{headerShown: false}}
-    />
+  return (  
+    <>
+    <StatusBar hidden={false} />
+      <Stack>
+        <Stack.Screen 
+        name="(tabs)"
+        options={{headerShown: false}}
+        />
 
-    <Stack.Screen
-    name="movies/[id]"
-    options={{headerShown: false}}
-    />
-  </Stack>;
+        <Stack.Screen
+        name="movies/[id]"
+        options={{headerShown: false}}
+        />
+      </Stack>
+    </>
+  );
 }
+
+/****
+ * Her yerde status bar görünmesin istersen;
+ * <>
+ * <StatusBar hidden={true} />
+ * <Stack>
+ *   <Stack.Screen 
+ *   name="(tabs)"
+ *   options={{headerShown: false}}
+ *   />
+ * 
+ *   <Stack.Screen
+ *   name="movies/[id]"
+ *   options={{headerShown: false}}
+ *   />
+ * </Stack>
+ * </>
+ * 
+ */
