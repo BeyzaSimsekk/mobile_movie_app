@@ -22,7 +22,7 @@ const MovieDetails = () => {
   return (
     <>
     <StatusBar hidden={true} />
-      <View className='bg-primary flex-1'>
+      <View className='relative w-full h-[550px] bg-primary flex-1'>
         <ScrollView contentContainerStyle={{paddingBottom:80}}>
           <View>
             <Image 
@@ -30,6 +30,13 @@ const MovieDetails = () => {
               className='w-full h-[550px]'
               resizeMode='stretch'
             />
+            <TouchableOpacity className='movie_details-watchBtn'>
+              <Image
+                source={icons.play}
+                className='size-5'
+                tintColor='#fff'
+              />
+            </TouchableOpacity>
           </View>
 
           <View className='flex-col items-start justify-center mt-5 px-5'>
@@ -71,8 +78,7 @@ const MovieDetails = () => {
             tintColor='#fff'
           />
           <Text className='text-white font-lexend-semibold text-base'>Go Back</Text>
-        </TouchableOpacity>
-        
+        </TouchableOpacity> 
 
       </View>
     </>
