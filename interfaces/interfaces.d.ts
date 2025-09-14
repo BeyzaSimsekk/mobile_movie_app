@@ -82,3 +82,8 @@ interface Props {
   value?: string;
   onChangeText?: (text: string) => void;
 }
+
+interface MovieInfoProps{
+  label: string;
+  value?: string | number | null;
+}
