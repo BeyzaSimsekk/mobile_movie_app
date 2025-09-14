@@ -1,12 +1,51 @@
-import React from 'react'
-import { StatusBar, Text, View } from 'react-native'
+import { icons } from '@/constants/icons';
+import { fetchMovieDetails } from '@/services/api';
+import useFetch from '@/services/useFetch';
+import { useLocalSearchParams } from 'expo-router';
+import React from 'react';
+import { Image, ScrollView, StatusBar, Text, View } from 'react-native';
 
 const MovieDetails = () => {
+
+  const {id} = useLocalSearchParams(); // id almak istediğinde useLocalSearchParams kullan
+
+  const {data: movie, loading} = useFetch(() => fetchMovieDetails(id as string));
+
   return (
     <>
     <StatusBar hidden={true} />
-      <View>
-        <Text>MovieDetails</Text>
+      <View className='bg-primary flex-1'>
+        <ScrollView contentContainerStyle={{paddingBottom:80}}>
+          <View>
+            <Image 
+              source={{uri:`https://image.tmdb.org/t/p/w500${movie?.poster_path}`}}
+              className='w-full h-[550px]'
+              resizeMode='stretch'
+            />
+          </View>
+
+          <View className='flex-col items-start justify-center mt-5 px-5'>
+            <Text className='movie_details-title'>{movie?.title}</Text>
+            <View className='movie_details-small'>
+              <Text className='movie_details-small-text'>{movie?.release_date?.split('-')[0]} </Text>
+              <Text className='movie_details-small-text'>| {movie?.runtime}min</Text>
+            </View>
+
+            <View className='movie_details-rating'>
+              <Image
+                source={icons.star}
+                className='size-4'
+              />
+              <Text className='movie_details-rating-text'>
+                {Math.round(movie?.vote_average ?? 0)}/10
+              </Text>
+              
+              <Text className='text-light-200 text-lg font-lexend'>({movie?.vote_count} votes)</Text>
+
+            </View>
+
+          </View>
+        </ScrollView>
       </View>
     </>
   )

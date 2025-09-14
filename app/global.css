@@ -53,4 +53,19 @@
   .header-trending {
     @apply text-3xl text-white mb-3 font-lexend-bold;
   }
+  .movie_details-title {
+    @apply text-white font-lexend-bold text-3xl;
+  }
+  .movie_details-small {
+    @apply flex-row items-center gap-x-1 mt-2;
+  }
+  .movie_details-small-text {
+    @apply text-light-200 text-lg font-lexend;
+  }
+  .movie_details-rating {
+    @apply flex-row items-center bg-dark-100 px-2 py-1 rounded-md gap-x-1 mt-2;
+  }
+  .movie_details-rating-text {
+    @apply text-white font-lexend-bold text-lg;
+  }
 }
