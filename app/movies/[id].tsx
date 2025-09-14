@@ -5,6 +5,14 @@ import { useLocalSearchParams } from 'expo-router';
 import React from 'react';
 import { Image, ScrollView, StatusBar, Text, View } from 'react-native';
 
+// () => () => implicit return | () => {} => explicit return (return yazmak şart)
+const MovieInfo = ({label, value} : MovieInfoProps) => (
+  <View className='movie-info-container'>
+    <Text className='movie-info-label'>{label}</Text>
+    <Text className='movie-info-value'>{value || 'N/A'}</Text>
+  </View>
+)
+
 const MovieDetails = () => {
 
   const {id} = useLocalSearchParams(); // id almak istediğinde useLocalSearchParams kullan

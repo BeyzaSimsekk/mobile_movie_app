@@ -68,4 +68,13 @@
   .movie_details-rating-text {
     @apply text-white font-lexend-bold text-lg;
   }
+  .movie-info-container {
+    @apply flex-col items-start justify-center mt-5;
+  }
+  .movie-info-label {
+    @apply text-light-200 text-base font-lexend;
+  }
+  .movie-info-value {
+    @apply text-light-100 text-base font-lexend-bold mt-2;
+  }
 }
