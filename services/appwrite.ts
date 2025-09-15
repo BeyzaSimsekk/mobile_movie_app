@@ -4,7 +4,7 @@ import { Client, Databases, ID, Query } from "react-native-appwrite";
 // track the searches made by a user
 
 const DATABASE_ID = process.env.EXPO_PUBLIC_APPWRITE_DATABASE_ID!;
-const TABLE_ID = process.env.EXPO_PUBLIC_APPWRITE_TABLE_ID!;
+const METRICS_TABLE_ID = process.env.EXPO_PUBLIC_APPWRITE_METRICS_TABLE_ID!;
 
 const client = new Client()
     .setEndpoint('https://cloud.appwrite.io/v1')
@@ -15,7 +15,7 @@ const database = new Databases(client);
 export const updateSearchCount = async (query: string, movie: Movie) => {
 
     try {
-        const result = await database.listDocuments(DATABASE_ID, TABLE_ID, [
+        const result = await database.listDocuments(DATABASE_ID, METRICS_TABLE_ID, [
             Query.equal("searchTerm", query),
     ]);
 
@@ -26,14 +26,14 @@ export const updateSearchCount = async (query: string, movie: Movie) => {
 
         await database.updateDocument(
             DATABASE_ID,
-            TABLE_ID,
+            METRICS_TABLE_ID,
             existingMovie.$id,
             {
                 count: existingMovie.count + 1
             }
         )
     } else {
-        await database.createDocument(DATABASE_ID, TABLE_ID, ID.unique(), {
+        await database.createDocument(DATABASE_ID, METRICS_TABLE_ID, ID.unique(), {
             searchTerm: query,
             movie_id: movie.id,
             count: 1,
@@ -52,7 +52,7 @@ export const updateSearchCount = async (query: string, movie: Movie) => {
 
 export const getTrendingMovies = async (): Promise<TrendingMovie[] | undefined> => {
     try {
-        const result = await database.listDocuments(DATABASE_ID, TABLE_ID, [
+        const result = await database.listDocuments(DATABASE_ID, METRICS_TABLE_ID, [
             Query.limit(5),
             Query.orderDesc("count")
     ]);
