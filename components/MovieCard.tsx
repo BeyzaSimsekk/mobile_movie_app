@@ -1,4 +1,5 @@
 import { icons } from '@/constants/icons'
+import { Movie } from '@/interfaces/interfaces'
 import { Link } from 'expo-router'
 import { Image, Text, TouchableOpacity, View } from 'react-native'
 

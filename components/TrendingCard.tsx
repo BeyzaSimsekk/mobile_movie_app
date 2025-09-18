@@ -1,4 +1,5 @@
 import { images } from "@/constants/images";
+import { TrendingCardProps } from "@/interfaces/interfaces";
 import MaskedView from "@react-native-masked-view/masked-view";
 import { Link } from 'expo-router';
 import React from 'react';

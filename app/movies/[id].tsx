@@ -1,4 +1,5 @@
 import { icons } from '@/constants/icons';
+import { MovieInfoProps } from '@/interfaces/interfaces';
 import { fetchMovieDetails } from '@/services/api';
 import useFetch from '@/services/useFetch';
 import { router, useLocalSearchParams } from 'expo-router';
