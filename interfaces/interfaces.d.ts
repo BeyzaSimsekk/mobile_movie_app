@@ -1,3 +1,5 @@
+import { Models } from "react-native-appwrite";
+
 interface Movie {
   id: number;
   title: string;
@@ -86,4 +88,38 @@ interface Props {
 interface MovieInfoProps{
   label: string;
   value?: string | number | null;
+}
+
+// *****************************AUTHENTICATION********************************
+
+export interface User extends Models.Document {
+    name: string;
+    email: string;
+    avatar: string;
+}
+
+interface CreateUserParams{
+  email: string;
+  password: string;
+  name: string;
+}
+
+interface SignInParams {
+  email: string;
+  password: string;
+}
+
+interface ProfileFieldProps {
+  label: string;
+  value: string;
+  icon: ImageSourcePropType;
+}
+
+interface CustomButtonProps {
+  onPress?: () => void;
+  title?: string;
+  style?: string;
+  leftIcon?: React.ReactNode;
+  textStyle?: string;
+  isLoading?: boolean;
 }
