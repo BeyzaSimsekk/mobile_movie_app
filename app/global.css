@@ -26,6 +26,9 @@
   .home-logo {
     @apply w-12 h-10 mt-20 mb-5 mx-auto;
   }
+  .login-logo {
+    @apply w-20 h-15 mt-14 mb-5 mx-auto;
+  }
   .search-bar {
     @apply flex-row items-center bg-dark-200 rounded-full px-5 py-3;
   }
@@ -85,5 +88,57 @@
   }
   .movie_details-watchBtn {
     @apply absolute -bottom-6 right-4 bg-accent rounded-full p-5 items-center justify-center z-50;
+  }
+  .label {
+    @apply text-base text-start w-full font-lexend-medium text-gray-500 pl-2;
+  }
+  .input {
+    @apply rounded-lg p-3 w-full text-base font-lexend-semibold text-dark-100 border-b leading-5;
+  }
+  .custom-btn {
+    @apply bg-dark-100 rounded-full p-3 w-full flex flex-row justify-center;
+  }
+  .h1-bold {
+    @apply text-3xl font-lexend-bold;
+  }
+
+  .h3-bold {
+    @apply text-xl font-lexend-bold;
+  }
+
+  .base-bold {
+    @apply text-lg font-lexend-bold !important;
+  }
+
+  .base-semibold {
+    @apply text-lg font-lexend-semibold;
+  }
+
+  .base-regular {
+    @apply text-lg font-lexend;
+  }
+
+  .paragraph-bold {
+    @apply text-base font-lexend-bold;
+  }
+
+  .paragraph-semibold {
+    @apply text-base font-lexend-semibold;
+  }
+
+  .paragraph-medium {
+    @apply text-base font-lexend-medium;
+  }
+
+  .body-medium {
+    @apply text-sm font-lexend-medium;
+  }
+
+  .body-regular {
+    @apply text-sm font-lexend;
+  }
+
+  .small-bold {
+    @apply text-xs font-lexend-bold;
   }
 }
