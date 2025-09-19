@@ -1,6 +1,8 @@
 // import CustomButton from '@/components/CustomButton'
 // import CustomInput from '@/components/CustomInput'
 // import { signIn } from '@/lib/appwrite'
+import CustomButton from '@/components/CustomButton'
+import CustomInput from '@/components/CustomInput'
 import { signIn } from '@/services/appwrite'
 import { Link, router } from 'expo-router'
 import React, { useState } from 'react'
@@ -33,7 +35,7 @@ const SignIn = () => {
   return (
     <View className='flex-1 bg-primary'>
       <View className='gap-10 bg-white rounded-lg p-5 mt-5'>
-        {/* <CustomInput
+        <CustomInput
             placeholder='Enter your email'
             value={form.email}
             onChangeText={(text) => setForm((prev)=>({...prev, email: text}))}
@@ -51,11 +53,11 @@ const SignIn = () => {
         title='Sign In'
         isLoading={isSubmitting}
         onPress={submit}
-        /> */}
+        /> 
 
         <View className='flex flex-row justify-center mt-5 gap-2'>
-          <Text className="base-regular text-gray-100">Don't have an account?</Text>
-          <Link href = "/sign-up" className= "base-bold text-primary">Sign Up</Link>
+          <Text className="base-regular text-light-100">Don't have an account? </Text>
+          <Link href = "/sign-up" className= "base-bold text-accent">Sign Up </Link>
         </View>
       </View>
     </View>
