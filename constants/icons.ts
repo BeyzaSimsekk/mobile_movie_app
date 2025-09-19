@@ -1,4 +1,5 @@
 import arrow from "@/assets/icons/arrow.png";
+import authLogo from "@/assets/icons/authLogo.png";
 import home from "@/assets/icons/home.png";
 import logo from "@/assets/icons/logo.png";
 import person from "@/assets/icons/person.png";
@@ -17,5 +18,6 @@ export const icons = {
   star,
   play,
   arrow,
-  SearchBg
+  SearchBg,
+  authLogo
 };

@@ -6,7 +6,7 @@ import CustomInput from '@/components/CustomInput'
 import { signIn } from '@/services/appwrite'
 import { Link, router } from 'expo-router'
 import React, { useState } from 'react'
-import { Alert, Text, View } from 'react-native'
+import { Alert, Dimensions, Text, View } from 'react-native'
 
 const SignIn = () => {
 
@@ -34,7 +34,7 @@ const SignIn = () => {
 
   return (
     <View className='flex-1 bg-primary'>
-      <View className='gap-10 bg-white rounded-lg p-5 mt-5'>
+      <View className='gap-10 bg-white rounded-lg p-8 mt-8' style={{height: Dimensions.get('screen').height}}>
         <CustomInput
             placeholder='Enter your email'
             value={form.email}

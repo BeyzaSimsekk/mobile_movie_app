@@ -26,8 +26,8 @@
   .home-logo {
     @apply w-12 h-10 mt-20 mb-5 mx-auto;
   }
-  .login-logo {
-    @apply w-20 h-15 mt-14 mb-5 mx-auto;
+  .logo {
+    @apply self-center size-24 absolute -bottom-16;
   }
   .search-bar {
     @apply flex-row items-center bg-dark-200 rounded-full px-5 py-3;
@@ -96,7 +96,7 @@
     @apply rounded-lg p-3 w-full text-base font-lexend-semibold text-dark-100 border-b leading-5;
   }
   .custom-btn {
-    @apply bg-dark-100 rounded-full p-3 w-full flex flex-row justify-center;
+    @apply bg-light-100 rounded-md p-3 w-full flex flex-row justify-center;
   }
   .h1-bold {
     @apply text-3xl font-lexend-bold;

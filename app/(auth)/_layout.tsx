@@ -19,7 +19,7 @@ export default function AuthLayout() {
       <ScrollView className='bg-primary h-full' keyboardShouldPersistTaps="handled" >
         <View className='w-full relative' style={{height: Dimensions.get('screen').height / 2.25}} >
         <Image source={images.bg} className='absolute w-full z-0'/>
-        <Image source={icons.logo} className = "home-logo"/>
+        <Image source={icons.authLogo} className = "logo z-10"/>
         </View>
         
       <Slot />
