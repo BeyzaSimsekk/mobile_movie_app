@@ -1,9 +1,8 @@
-// import CustomButton from '@/components/CustomButton'
-// import CustomInput from '@/components/CustomInput'
-//import { createUser } from '@/lib/appwrite'
+import CustomButton from '@/components/CustomButton'
+import CustomInput from '@/components/CustomInput'
 import { Link, router } from 'expo-router'
 import React, { useState } from 'react'
-import { Alert, Text, View } from 'react-native'
+import { Alert, Dimensions, Text, View } from 'react-native'
 
 const SignUp = () => {
 
@@ -30,8 +29,9 @@ const SignUp = () => {
   }
 
   return (
-    <View className='gap-10 bg-white rounded-lg p-5 mt-5'>
-      {/* <CustomInput
+    <View className='flex-1 bg-primary'>
+          <View className='gap-10 bg-white rounded-lg p-8 mt-8' style={{height: Dimensions.get('screen').height/1.9}}>
+      <CustomInput
           placeholder='Enter your full name'
           value={form.name}
           onChangeText={(text) => setForm((prev)=>({...prev, name: text}))}
@@ -55,12 +55,13 @@ const SignUp = () => {
       title='Sign Up'
       isLoading={isSubmitting}
       onPress={submit}
-      /> */}
+      />
 
-      <View className='flex flex-row justify-center mt-5 gap-2'>
-        <Text className="base-regular text-gray-100">Already have an account?</Text>
-        <Link href = "/sign-in" className= "base-bold text-primary">Sign In</Link>
+      <View className='flex flex-row justify-center mt-1 gap-2'>
+        <Text className="base-regular text-light-100">Already have an account?</Text>
+        <Link href = "/sign-in" className= "base-bold text-accent">Sign In</Link>
       </View>
+    </View>
     </View>
   )
 }

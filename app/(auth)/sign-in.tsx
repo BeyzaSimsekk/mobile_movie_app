@@ -34,7 +34,7 @@ const SignIn = () => {
 
   return (
     <View className='flex-1 bg-primary'>
-      <View className='gap-10 bg-white rounded-lg p-8 mt-8' style={{height: Dimensions.get('screen').height}}>
+      <View className='gap-10 bg-white rounded-lg p-8 mt-8'style={{height: Dimensions.get('screen').height/1.9}}>
         <CustomInput
             placeholder='Enter your email'
             value={form.email}
@@ -50,14 +50,14 @@ const SignIn = () => {
             secureTextEntry={true}
         />
         <CustomButton
-        title='Sign In'
+        title="Sign In "
         isLoading={isSubmitting}
         onPress={submit}
         /> 
 
         <View className='flex flex-row justify-center mt-5 gap-2'>
-          <Text className="base-regular text-light-100">Don't have an account? </Text>
-          <Link href = "/sign-up" className= "base-bold text-accent">Sign Up </Link>
+          <Text className="base-regular text-light-100">Don't have an account?</Text>
+          <Link href = "/sign-up" className= "base-bold text-accent">Sign Up</Link>
         </View>
       </View>
     </View>
