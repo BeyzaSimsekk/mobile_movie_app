@@ -1,9 +1,12 @@
+import useAuthStore from "@/store/auth.store";
 import { useFonts } from "expo-font";
-import { Stack } from "expo-router";
+import { SplashScreen, Stack } from "expo-router";
+import { useEffect } from "react";
 import { StatusBar } from "react-native";
 import "./global.css";
 
 export default function RootLayout() {
+  const {isLoading, fetchAuthenticatedUser} = useAuthStore();
 
   const [fontsLoaded, error] = useFonts({
     "Lexend-Bold": require('../assets/fonts/Lexend-Bold.ttf'),
@@ -12,6 +15,17 @@ export default function RootLayout() {
     "Lexend-SemiBold": require('../assets/fonts/Lexend-SemiBold.ttf'),
     "Lexend-Light": require('../assets/fonts/Lexend-Light.ttf'),
   });
+
+  useEffect(() => {
+    if (error) console.error("Font yükleme hatası:", error);
+    if(fontsLoaded) SplashScreen.hideAsync();
+  }, [fontsLoaded, error]);
+
+  useEffect(() => {
+    fetchAuthenticatedUser()
+  }, [])
+
+  if (!fontsLoaded || isLoading) return null;
 
   return (  
     <>
