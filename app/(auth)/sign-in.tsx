@@ -1,6 +1,3 @@
-// import CustomButton from '@/components/CustomButton'
-// import CustomInput from '@/components/CustomInput'
-// import { signIn } from '@/lib/appwrite'
 import CustomButton from '@/components/CustomButton'
 import CustomInput from '@/components/CustomInput'
 import { signIn } from '@/services/appwrite'
@@ -24,7 +21,7 @@ const SignIn = () => {
     try {
       await signIn({email, password});
 
-      router.push('/');
+      router.push('/(tabs)');
     } catch (error: any) {
       Alert.alert('Error', error.message);
     } finally{

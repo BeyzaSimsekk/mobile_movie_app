@@ -126,25 +126,25 @@ export const getTrendingMovies = async (): Promise<TrendingMovie[] | undefined> 
      }
  }
 
-// export const getCurrentUser = async () => {
-//     try {
-//         const currentAccount = await account.get();
-//         if(!currentAccount) {
-//             throw new Error("No user is currently signed in");
-//         }
+export const getCurrentUser = async () => {
+    try {
+        const currentAccount = await account.get();
+        if(!currentAccount) {
+            throw new Error("No user is currently signed in");
+        }
 
-//         const currentUser = await databases.listDocuments(
-//             appwriteConfig.databaseId,
-//             appwriteConfig.userCollectionId,
-//             [Query.equal('accountId', currentAccount.$id)]
-//         )
+        const currentUser = await databases.listDocuments(
+            appwriteConfig.databaseId,
+            appwriteConfig.userTableId,
+            [Query.equal('accountId', currentAccount.$id)]
+        )
 
-//         if(!currentAccount) throw Error;
+        if(!currentAccount) throw Error;
 
-//         return currentUser.documents[0];
+        return currentUser.documents[0];
 
-//     } catch (error) {
-//         console.log(error);
-//         throw new Error(error as string);
-//     }
-// }
+    } catch (error) {
+        console.log(error);
+        throw new Error(error as string);
+    }
+}
