@@ -89,6 +89,9 @@
   .movie_details-watchBtn {
     @apply absolute -bottom-6 right-4 bg-accent rounded-full p-5 items-center justify-center z-50;
   }
+  .profile-ifs {
+    @apply flex-1 justify-center items-center bg-primary;
+  }
   .label {
     @apply text-base text-start w-full font-lexend-medium text-gray-500 pl-2;
   }

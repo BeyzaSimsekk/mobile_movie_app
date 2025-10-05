@@ -25,12 +25,26 @@ const profile = () => {
 
   if(isLoading) {
     return (
-      <View className='flex-1 justify-center items-center bg-primary'>
+      <View className='profile-ifs'>
         <ActivityIndicator size='large' color="#AB8BFF"/>
         <Text className='base-regular text-light-100 mt-3'>Loading...</Text>
       </View>
+    );
+  }
+
+  // eğer kullanıcı yoksa diye kontrol
+  if(!user) {
+    return (
+      <View className='profile-ifs'>
+        <Text className='text-base text-accent font-lexend-semibold'>Failed to load profile info.</Text>
+      </View>
     )
   }
+
+  const avatarUrl = 
+    user.avatar && user.avatar.startsWith("http")
+    ? user.avatar 
+    : `https://cloud.appwrite.io/v1/avatars/initials?name=${encodeURIComponent(user.name || "U")}`;
 
   return (
     <View className='bg-primary flex-1 px-10'>
