@@ -3,7 +3,7 @@ import { account } from '@/services/appwrite'
 import useAuthStore from '@/store/auth.store'
 import { router } from 'expo-router'
 import React, { useCallback } from 'react'
-import { Alert, Image, Text, View } from 'react-native'
+import { ActivityIndicator, Alert, Image, Text, View } from 'react-native'
 
 const profile = () => {
 
@@ -22,6 +22,15 @@ const profile = () => {
       setLoading(false);
     }
   }, []);
+
+  if(isLoading) {
+    return (
+      <View className='flex-1 justify-center items-center bg-primary'>
+        <ActivityIndicator size='large' color="#AB8BFF"/>
+        <Text className='base-regular text-light-100 mt-3'>Loading...</Text>
+      </View>
+    )
+  }
 
   return (
     <View className='bg-primary flex-1 px-10'>
