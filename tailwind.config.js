@@ -17,6 +17,10 @@ module.exports = {
           200: "#0F0D23",
         },
         accent: "#AB8BFF",
+        light_accent: "#EDE5FF",
+        dark_accent: "#6340BE",
+        accent_transparent_dark: "#2A273C",
+        light_transparent_dark: "#202137",
       },
       fontFamily: {
         lexend: ["Lexend-Regular"],

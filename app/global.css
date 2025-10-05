@@ -92,6 +92,9 @@
   .profile-ifs {
     @apply flex-1 justify-center items-center bg-primary;
   }
+  .profile-avatar {
+    @apply w-32 h-32 rounded-full border-4 shadow-md;
+  }
   .label {
     @apply text-base text-start w-full font-lexend-medium text-gray-500 pl-2;
   }

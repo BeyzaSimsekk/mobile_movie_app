@@ -1,4 +1,3 @@
-import { icons } from '@/constants/icons'
 import { account } from '@/services/appwrite'
 import useAuthStore from '@/store/auth.store'
 import { router } from 'expo-router'
@@ -47,14 +46,13 @@ const profile = () => {
     : `https://cloud.appwrite.io/v1/avatars/initials?name=${encodeURIComponent(user.name || "U")}`;
 
   return (
-    <View className='bg-primary flex-1 px-10'>
-      <View className='flex justify-center items-center flex-1 flex-col gap-5'>
+    <View className='bg-primary flex-1 px-6'>
+      {/* Profile Header */}
+      <View className='items-center mt-16 mb-8'>
         <Image 
-          source={icons.person}
-          className='size-10'
-          tintColor="#fff"
+        source={{uri: avatarUrl}}
+        className='profile-avatar'
         />
-        <Text className='text-gray-500 text-base font-lexend-bold'>Profile</Text>
       </View>
     </View>
   )
