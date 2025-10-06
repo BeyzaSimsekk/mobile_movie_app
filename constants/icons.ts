@@ -1,6 +1,7 @@
 import arrow from "@/assets/icons/arrow.png";
 import arrowBack from "@/assets/icons/arrowBack.png";
 import authLogo from "@/assets/icons/authLogo.png";
+import edit from "@/assets/icons/edit.png";
 import home from "@/assets/icons/home.png";
 import logo from "@/assets/icons/logo.png";
 import person from "@/assets/icons/person.png";
@@ -20,6 +21,7 @@ export const icons = {
   play,
   arrow,
   arrowBack,
+  edit,
   SearchBg,
   authLogo
 };

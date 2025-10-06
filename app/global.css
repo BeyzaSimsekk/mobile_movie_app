@@ -99,7 +99,10 @@
     @apply text-light-200 text-xl font-lexend-semibold;
   }
   .profile-avatar {
-    @apply w-32 h-32 rounded-full border-4 shadow-md;
+    @apply w-28 h-28 rounded-full border-2 border-light-200 shadow-md;
+  }
+  .profile-avatar-edit {
+    @apply absolute bottom-0 right-1 bg-accent p-2 rounded-full;
   }
   .label {
     @apply text-base text-start w-full font-lexend-medium text-gray-500 pl-2;

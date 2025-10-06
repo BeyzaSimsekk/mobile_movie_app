@@ -3,7 +3,7 @@ import { account } from '@/services/appwrite'
 import useAuthStore from '@/store/auth.store'
 import { router } from 'expo-router'
 import React, { useCallback } from 'react'
-import { ActivityIndicator, Alert, Image, ScrollView, Text, View } from 'react-native'
+import { ActivityIndicator, Alert, Image, ScrollView, Text, TouchableOpacity, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
 const profile = () => {
@@ -56,6 +56,23 @@ const profile = () => {
           <Image source={icons.arrowBack} className='size-5'/> 
           <Text className='profile-header-title'>Profile</Text>
           <Image source={icons.search} className='size-5' tintColor="#A8B5DB"/>
+        </View>
+
+        {/* Avatar */}
+        <View className='items-center mt-16'>
+          <View className='relative'>
+            <Image 
+              source={{uri: avatarUrl}}
+              className='profile-avatar'
+            />
+            <TouchableOpacity
+              activeOpacity={0.8}
+              className='profile-avatar-edit'
+              onPress={() => {}}
+            >
+              <Image source={icons.edit} className='size-5 tint-white'/>
+            </TouchableOpacity>
+          </View>
         </View>
 
       </ScrollView>
