@@ -104,6 +104,21 @@
   .profile-avatar-edit {
     @apply absolute bottom-0 right-1 bg-accent p-2 rounded-full;
   }
+  .profile-info-card {
+    @apply flex-col bg-white rounded-3xl mx-6 mt-8 p-6 gap-2;
+  }
+  .infoRow-container {
+    @apply flex-row items-center mb-4;
+  }
+  .infoRow-icon {
+    @apply bg-light-100 p-3 rounded-full mr-3;
+  }
+  .infoRow-label {
+    @apply text-light-200 text-sm font-lexend-medium;
+  }
+  .infoRow-value {
+    @apply text-secondary text-base font-lexend-semibold mt-1;
+  }
   .label {
     @apply text-base text-start w-full font-lexend-medium text-gray-500 pl-2;
   }

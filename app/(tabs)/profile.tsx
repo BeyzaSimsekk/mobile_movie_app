@@ -1,4 +1,5 @@
 import { icons } from '@/constants/icons'
+import { ProfileFieldProps } from '@/interfaces/interfaces'
 import { account } from '@/services/appwrite'
 import useAuthStore from '@/store/auth.store'
 import { router } from 'expo-router'
@@ -75,9 +76,36 @@ const profile = () => {
           </View>
         </View>
 
+        {/* InfoCard */}
+        <View className='profile-info-card'>
+          <InfoRow
+            icon={icons.user}
+            label='Full Name'
+            value={user.name}
+          />
+          <InfoRow
+            icon={icons.email}
+            label='Email'
+            value={user.email}
+          />
+        </View>
+
       </ScrollView>
     </SafeAreaView>
   )
 }
+
+const InfoRow = ({label,value,icon}: ProfileFieldProps) =>(
+  <View className='infoRow-container'>
+    <View className='infoRow-icon'>
+      <Image source={icon} className='size-5' />
+    </View>
+
+    <View>
+      <Text className='infoRow-label'>{label}</Text>
+      <Text className='infoRow-value'>{value}</Text>
+    </View>
+  </View>
+)
 
 export default profile
