@@ -1,8 +1,10 @@
+import { icons } from '@/constants/icons'
 import { account } from '@/services/appwrite'
 import useAuthStore from '@/store/auth.store'
 import { router } from 'expo-router'
 import React, { useCallback } from 'react'
-import { ActivityIndicator, Alert, Image, Text, View } from 'react-native'
+import { ActivityIndicator, Alert, Image, ScrollView, Text, View } from 'react-native'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
 const profile = () => {
 
@@ -45,16 +47,19 @@ const profile = () => {
     ? user.avatar 
     : `https://cloud.appwrite.io/v1/avatars/initials?name=${encodeURIComponent(user.name || "U")}`;
 
+    //şimdilik arrowBack ve Profile.tsx teki searchte fonksiyonellik olmayacağı için Image olarak oluşturduk.*****BUNU GÜNCELLE*****
   return (
-    <View className='bg-primary flex-1 px-6'>
-      {/* Profile Header */}
-      <View className='items-center mt-16 mb-8'>
-        <Image 
-        source={{uri: avatarUrl}}
-        className='profile-avatar'
-        />
-      </View>
-    </View>
+    <SafeAreaView className='flex-1 bg-primary'>
+      <ScrollView contentContainerStyle={{paddingBottom: 40}}>
+        {/* Header */}
+        <View className='profile-header'>
+          <Image source={icons.arrowBack} className='size-5'/> 
+          <Text className='profile-header-title'>Profile</Text>
+          <Image source={icons.search} className='size-5' tintColor="#A8B5DB"/>
+        </View>
+
+      </ScrollView>
+    </SafeAreaView>
   )
 }
 

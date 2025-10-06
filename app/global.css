@@ -92,6 +92,12 @@
   .profile-ifs {
     @apply flex-1 justify-center items-center bg-primary;
   }
+  .profile-header {
+    @apply flex-row justify-between items-center mt-8 px-6;
+  }
+  .profile-header-title {
+    @apply text-light-200 text-xl font-lexend-semibold;
+  }
   .profile-avatar {
     @apply w-32 h-32 rounded-full border-4 shadow-md;
   }
