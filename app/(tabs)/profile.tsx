@@ -7,6 +7,8 @@ import React, { useCallback } from 'react'
 import { ActivityIndicator, Alert, Image, ScrollView, Text, TouchableOpacity, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
+//EDİT PROFİLE VE EDİT AVATAR FONKSİYONLARI/APİLERİ YAZILACAK!!
+
 const profile = () => {
 
   const { user , setUser, setIsAuthenticated, isLoading, setLoading} = useAuthStore();
@@ -97,6 +99,27 @@ const profile = () => {
               <Image source={icons.saved} className='size-5' resizeMode='contain'/>
             </View>
             <Text className='text-dark_accent font-lexend-semibold text-base'>Saved Movies</Text>
+          </TouchableOpacity>
+        </View>
+
+        {/* Buttons */}
+        <View className='profile-buttons'>
+          {/* Edit Profile Button */}
+          <TouchableOpacity 
+            className='editProfile-btn'
+            onPress={() => {}} // FONKSİYONELLİĞİ SONRA YAZILACAK
+          >
+            <Image source={icons.edit} className='size-4' tintColor="#AB8BFF"/>
+            <Text className='editProfile-btn-text'>Edit Profile</Text>
+          </TouchableOpacity>
+
+          {/* Log Out Button */}
+          <TouchableOpacity
+            className='logoutProfile-btn'
+            onPress={handleLogout}
+          >
+            <Image source={icons.logout} className='size-4' />
+            <Text className='logoutProfile-btn-text'>Log Out</Text>
           </TouchableOpacity>
         </View>
 

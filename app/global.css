@@ -122,6 +122,21 @@
   .profile-info-card-saved {
     @apply flex-row items-center bg-light_accent rounded-3xl;
   }
+  .profile-buttons {
+    @apply mt-10 mx-6;
+  }
+  .editProfile-btn {
+    @apply border border-accent bg-accent_transparent_dark py-4 rounded-full flex-row justify-center items-center mb-4 gap-x-2;
+  }
+  .editProfile-btn-text {
+    @apply text-accent font-lexend-medium text-base;
+  }
+  .logoutProfile-btn {
+    @apply border border-light-200 bg-light_transparent_dark py-4 rounded-full flex-row justify-center items-center mb-4 gap-x-2;
+  }
+  .logoutProfile-btn-text {
+    @apply text-light-200 font-lexend-medium text-base;
+  }
   .label {
     @apply text-base text-start w-full font-lexend-medium text-gray-500 pl-2;
   }
