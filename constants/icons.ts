@@ -8,6 +8,7 @@ import logo from "@/assets/icons/logo.png";
 import person from "@/assets/icons/person.png";
 import play from "@/assets/icons/play.png";
 import save from "@/assets/icons/save.png";
+import saved from "@/assets/icons/saved.png";
 import search from "@/assets/icons/search.png";
 import SearchBg from "@/assets/icons/SearchBg.png";
 import star from "@/assets/icons/star.png";
@@ -26,6 +27,7 @@ export const icons = {
   edit,
   user,
   email,
+  saved,
   SearchBg,
   authLogo
 };

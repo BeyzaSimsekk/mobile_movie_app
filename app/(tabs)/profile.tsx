@@ -88,6 +88,16 @@ const profile = () => {
             label='Email'
             value={user.email}
           />
+
+          <TouchableOpacity
+            onPress={() => router.push("/(tabs)/saved")}
+            className='profile-info-card-saved'
+          >
+            <View className='infoRow-icon'>
+              <Image source={icons.saved} className='size-5' resizeMode='contain'/>
+            </View>
+            <Text className='text-dark_accent font-lexend-semibold text-base'>Saved Movies</Text>
+          </TouchableOpacity>
         </View>
 
       </ScrollView>
@@ -98,7 +108,7 @@ const profile = () => {
 const InfoRow = ({label,value,icon}: ProfileFieldProps) =>(
   <View className='infoRow-container'>
     <View className='infoRow-icon'>
-      <Image source={icon} className='size-5' />
+      <Image source={icon} className='size-5' resizeMode='contain'/>
     </View>
 
     <View>

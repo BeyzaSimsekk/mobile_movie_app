@@ -111,13 +111,16 @@
     @apply flex-row items-center mb-4;
   }
   .infoRow-icon {
-    @apply bg-light-100 p-3 rounded-full mr-3;
+    @apply bg-light-100 p-4 rounded-full mr-3;
   }
   .infoRow-label {
     @apply text-light-200 text-sm font-lexend-medium;
   }
   .infoRow-value {
     @apply text-secondary text-base font-lexend-semibold mt-1;
+  }
+  .profile-info-card-saved {
+    @apply flex-row items-center bg-light_accent rounded-3xl;
   }
   .label {
     @apply text-base text-start w-full font-lexend-medium text-gray-500 pl-2;
