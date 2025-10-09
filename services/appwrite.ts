@@ -1,5 +1,5 @@
 import { CreateUserParams, Movie, SignInParams, TrendingMovie } from "@/interfaces/interfaces";
-import { Account, Avatars, Client, Databases, ID, Query } from "react-native-appwrite";
+import { Account, Avatars, Client, Databases, ID, Query, Storage } from "react-native-appwrite";
 
 // track the searches made by a user
 
@@ -8,7 +8,8 @@ const appwriteConfig ={
     databaseId: process.env.EXPO_PUBLIC_APPWRITE_DATABASE_ID!,
     platform: "com.byz.molixapp",
     metricsTableId: process.env.EXPO_PUBLIC_APPWRITE_METRICS_TABLE_ID!,
-    userTableId:process.env.EXPO_PUBLIC_APPWRITE_USER_TABLE_ID!
+    userTableId:process.env.EXPO_PUBLIC_APPWRITE_USER_TABLE_ID!,
+    avatarsStorageId:process.env.EXPO_PUBLIC_APPWRITE_AVATARS_STORAGE_ID!
 }
 
 
@@ -21,7 +22,7 @@ client
 
 export const account = new Account(client);
 export const databases = new Databases(client)
-//export const storage= new Storage(client);
+export const storage= new Storage(client);
 const avatars = new Avatars(client);
 
 
@@ -149,38 +150,3 @@ export const getCurrentUser = async () => {
     }
 }
 
-export const updateUserProfile = async (userId: string, data: {name?: string, email?: string}) => {
-    try {
-        
-        const updatedUser = await databases.updateDocument(
-            appwriteConfig.databaseId,
-            appwriteConfig.userTableId,
-            userId,
-            data
-        );
-        return updatedUser;
-
-    } catch (error) {
-        console.error("Update user profile error:", error);
-        throw error;
-    }
-}
-
-// (örnek: resim URL'si ya da base64 string)
-export const updateUserAvatar = async (userId: string, avatarUrl: string) => {
-    try {
-        
-        const updatedUser = await databases.updateDocument(
-            appwriteConfig.databaseId,
-            appwriteConfig.userTableId,
-            userId,
-            { avatar: avatarUrl }
-        );
-
-        return updatedUser;
-
-    } catch (error) {
-        console.error("Update user avatar error:", error);
-        throw error;
-    }
-}
