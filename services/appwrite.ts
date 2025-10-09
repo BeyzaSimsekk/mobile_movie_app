@@ -174,8 +174,42 @@ export const updateUserProfile = async (userId: string, name: string, email: str
 
 export const userUpdateAvatar = async (userId: string, imageUri: string) => {
     try {
-        
+
+        // 1) fetch ile uri'den blob al (expo-image-picker veya RN ImagePicker ile gelen uri'ler için çalışır)
+        const response = await fetch(imageUri); 
+        const blob = await response.blob();
+
+        // 2) dosya objesini hazırla (Appwrite Storage createFile bu formattaki objeyi bekliyor)
+        const fileName = imageUri.split('/').pop() || `avatar-${Date.now()}.jpg`;
+        const fileObj = {
+            uri: imageUri,
+            name: fileName,
+            type: blob.type || "image/png",
+            size: blob.size ?? 0
+        };
+
+        // 3) storage'a yükle
+        const file = await storage.createFile(
+            appwriteConfig.avatarsStorageId,
+            ID.unique(),
+            fileObj
+        );
+
+        // 4) public/view URL al (react-native-appwrite'da bu yöntemi kullanmak doğru)
+        const avatarUrl = storage.getFileViewURL(appwriteConfig.avatarsStorageId, file.$id);
+
+        // 5) DB'deki user kaydını güncelle
+        const updatedUser = await databases.updateDocument(
+            appwriteConfig.databaseId,
+            appwriteConfig.userTableId,
+            userId,
+            { avatar: avatarUrl}
+        );
+
+        return updatedUser;
+
     } catch (error) {
-        
+        console.error("Update User Avatar Error:", error);
+        throw new Error("Failed to update avatar");
     }
 }
