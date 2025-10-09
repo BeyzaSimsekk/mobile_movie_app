@@ -150,7 +150,7 @@ export const getCurrentUser = async () => {
     }
 }
 
-export const updateUserProfile = async (userId: string, name: string, email: string ) => {
+export const updateUserProfile = async (userId: string, name: string ) => {
     try {
         
         // Appwrite account update
@@ -161,7 +161,7 @@ export const updateUserProfile = async (userId: string, name: string, email: str
             appwriteConfig.databaseId,
             appwriteConfig.userTableId,
             userId,
-            { name, email }
+            { name }
         );
 
         return updatedUser;

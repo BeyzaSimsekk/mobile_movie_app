@@ -1,6 +1,6 @@
 import { icons } from '@/constants/icons';
 import { ProfileFieldProps, User } from '@/interfaces/interfaces';
-import { account, userUpdateAvatar } from '@/services/appwrite';
+import { account, updateUserProfile, userUpdateAvatar } from '@/services/appwrite';
 import useAuthStore from '@/store/auth.store';
 import * as ImagePicker from "expo-image-picker";
 import { router } from 'expo-router';
@@ -54,6 +54,35 @@ const profile = () => {
       setLoading(false);
     }
   }, [user])
+
+  const handleEditProfile = useCallback( async () => {
+    try {
+      
+      const newName = prompt("Enter your new name:", user?.name);
+
+      if(!newName) return;
+      
+      setLoading(true);
+
+      // User Null Check
+      if (!user) {
+        Alert.alert("Error", "User not found");
+        setLoading(false);
+        return;
+      }
+
+      const updatedUser = await updateUserProfile(user.$id, newName)
+      setUser(updatedUser as unknown as User);
+
+      Alert.alert("Success", "Profile information updated!");
+
+  } catch (error: any) {
+      console.error("Edit Profile Error:", error);
+      Alert.alert("Error", "Failed to update profile information");
+  } finally {
+      setLoading(false);
+  }
+  },[user])
 
   const handleLogout = useCallback(async () => {
     try {
