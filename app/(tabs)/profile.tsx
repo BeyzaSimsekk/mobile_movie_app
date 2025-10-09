@@ -7,7 +7,6 @@ import React, { useCallback } from 'react'
 import { ActivityIndicator, Alert, Image, ScrollView, Text, TouchableOpacity, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
-//EDİT PROFİLE VE EDİT AVATAR FONKSİYONLARI/APİLERİ YAZILACAK!!
 
 const profile = () => {
 

@@ -78,7 +78,7 @@ export const getTrendingMovies = async (): Promise<TrendingMovie[] | undefined> 
         console.log(error);
         return undefined;
     }
-} //bunlara dikkat et !!!! interface değiştikten sonra hata vermişti!!!
+}
 
  export const createUser = async({email, password, name} : CreateUserParams) => {
      try {
@@ -146,5 +146,22 @@ export const getCurrentUser = async () => {
     } catch (error) {
         console.log(error);
         throw new Error(error as string);
+    }
+}
+
+export const updateUserProfile = async (userId: string, data: {name?: string, email?: string}) => {
+    try {
+        
+        const updatedUser = await databases.updateDocument(
+            appwriteConfig.databaseId,
+            appwriteConfig.userTableId,
+            userId,
+            data
+        );
+        return updatedUser;
+
+    } catch (error) {
+        console.error("Update user profile error:", error);
+        throw error;
     }
 }
