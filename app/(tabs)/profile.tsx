@@ -1,16 +1,59 @@
-import { icons } from '@/constants/icons'
-import { ProfileFieldProps } from '@/interfaces/interfaces'
-import { account } from '@/services/appwrite'
-import useAuthStore from '@/store/auth.store'
-import { router } from 'expo-router'
-import React, { useCallback } from 'react'
-import { ActivityIndicator, Alert, Image, ScrollView, Text, TouchableOpacity, View } from 'react-native'
-import { SafeAreaView } from 'react-native-safe-area-context'
+import { icons } from '@/constants/icons';
+import { ProfileFieldProps, User } from '@/interfaces/interfaces';
+import { account, userUpdateAvatar } from '@/services/appwrite';
+import useAuthStore from '@/store/auth.store';
+import * as ImagePicker from "expo-image-picker";
+import { router } from 'expo-router';
+import React, { useCallback } from 'react';
+import { ActivityIndicator, Alert, Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 
 const profile = () => {
 
   const { user , setUser, setIsAuthenticated, isLoading, setLoading} = useAuthStore();
+
+  const handleAvatarChange = useCallback(async () => {
+    try {
+      
+      const {status} = await ImagePicker.requestMediaLibraryPermissionsAsync();
+      if(status !== "granted") {
+        Alert.alert("Permission denied", "We need access to your gallery to update your avatar.");
+        return;
+      }
+
+      const result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        allowsEditing: true,
+        aspect: [1, 1],
+        quality: 1,
+      });
+
+      if(result.canceled) return;
+      
+      const imageUri = result.assets[0].uri;
+      setLoading(true);
+
+      // User Null Check
+      if (!user) {
+        Alert.alert("Error", "User not found");
+        setLoading(false);
+        return;
+      }
+
+      const updatedUser = await userUpdateAvatar(user.$id, imageUri)
+
+      setUser(updatedUser as unknown as User);
+
+      Alert.alert("Success", "Your avatar has been updated!");
+
+    } catch (error:any) {
+      console.error("Avatar Update Error:", error);
+      Alert.alert("Error", "Failed to update avatar");
+    } finally {
+      setLoading(false);
+    }
+  }, [user])
 
   const handleLogout = useCallback(async () => {
     try {
