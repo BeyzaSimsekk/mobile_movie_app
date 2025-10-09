@@ -142,7 +142,7 @@ const profile = () => {
             <TouchableOpacity
               activeOpacity={0.8}
               className='profile-avatar-edit'
-              onPress={() => {}}
+              onPress={handleAvatarChange}
             >
               <Image source={icons.edit} className='size-5 tint-white'/>
             </TouchableOpacity>
@@ -178,7 +178,7 @@ const profile = () => {
           {/* Edit Profile Button */}
           <TouchableOpacity 
             className='editProfile-btn'
-            onPress={() => {}} // FONKSİYONELLİĞİ SONRA YAZILACAK
+            onPress={handleEditProfile}
           >
             <Image source={icons.edit} className='size-4' tintColor="#AB8BFF"/>
             <Text className='editProfile-btn-text'>Edit Profile</Text>

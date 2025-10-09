@@ -9,7 +9,7 @@ const appwriteConfig ={
     platform: "com.byz.molixapp",
     metricsTableId: process.env.EXPO_PUBLIC_APPWRITE_METRICS_TABLE_ID!,
     userTableId:process.env.EXPO_PUBLIC_APPWRITE_USER_TABLE_ID!,
-    avatarsStorageId:process.env.EXPO_PUBLIC_APPWRITE_AVATARS_STORAGE_ID!
+    bucketId:process.env.EXPO_PUBLIC_APPWRITE_STORAGE_ID!
 }
 
 
@@ -190,13 +190,13 @@ export const userUpdateAvatar = async (userId: string, imageUri: string) => {
 
         // 3) storage'a yükle
         const file = await storage.createFile(
-            appwriteConfig.avatarsStorageId,
+            appwriteConfig.bucketId,
             ID.unique(),
             fileObj
         );
 
         // 4) public/view URL al (react-native-appwrite'da bu yöntemi kullanmak doğru)
-        const avatarUrl = storage.getFileViewURL(appwriteConfig.avatarsStorageId, file.$id);
+        const avatarUrl = storage.getFileViewURL(appwriteConfig.bucketId, file.$id);
 
         // 5) DB'deki user kaydını güncelle
         const updatedUser = await databases.updateDocument(
