@@ -150,3 +150,32 @@ export const getCurrentUser = async () => {
     }
 }
 
+export const updateUserProfile = async (userId: string, name: string, email: string ) => {
+    try {
+        
+        // Appwrite account update
+        await account.updateName(name);
+
+        // Database update
+        const updatedUser = await databases.updateDocument(
+            appwriteConfig.databaseId,
+            appwriteConfig.userTableId,
+            userId,
+            { name, email }
+        );
+
+        return updatedUser;
+
+    } catch (error) {
+        console.error("Update User Profile Error:", error);
+        throw new Error("Failed to update user profile");
+    }
+}
+
+export const userUpdateAvatar = async (userId: string, imageUri: string) => {
+    try {
+        
+    } catch (error) {
+        
+    }
+}
