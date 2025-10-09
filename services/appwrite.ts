@@ -165,3 +165,22 @@ export const updateUserProfile = async (userId: string, data: {name?: string, em
         throw error;
     }
 }
+
+// (örnek: resim URL'si ya da base64 string)
+export const updateUserAvatar = async (userId: string, avatarUrl: string) => {
+    try {
+        
+        const updatedUser = await databases.updateDocument(
+            appwriteConfig.databaseId,
+            appwriteConfig.userTableId,
+            userId,
+            { avatar: avatarUrl }
+        );
+
+        return updatedUser;
+
+    } catch (error) {
+        console.error("Update user avatar error:", error);
+        throw error;
+    }
+}
