@@ -274,3 +274,23 @@ export const unsaveMovie = async (userId: string, movieId: string) => {
         throw new Error("Failed to unsave movie");
     }
 }
+
+// get saved movies
+export const getSavedMovies = async (userId: string) => {
+    try {
+        
+        const result = await databases.listDocuments(
+            appwriteConfig.databaseId,
+            appwriteConfig.savedMoviesTableId,
+            [
+                Query.equal("user_id", userId)
+            ]
+        );
+
+        return result.documents as unknown as Movie[];
+        
+    } catch (error) {
+        console.error("unsaveMovie error:", error);
+        throw new Error("Failed to unsave movie");
+    }
+}
