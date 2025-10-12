@@ -214,3 +214,39 @@ export const userUpdateAvatar = async (userId: string, imageUri: string) => {
         throw new Error("Failed to update avatar");
     }
 }
+
+// save movie
+export const saveMovie = async (userId: string, movie: Movie) => {
+    try {
+        
+        const saved = await databases.createDocument(
+            appwriteConfig.databaseId,
+            appwriteConfig.savedMoviesTableId,
+            ID.unique(),
+            {
+                user_id: userId,
+                movie_id: movie.id,
+                title: movie.title,
+                vote_average: movie.vote_average,
+                release_date: movie.release_date,
+                poster_url: `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+            }
+        );
+
+        return saved;
+
+    } catch (error) {
+        console.error("saveMovie error:",error);
+        throw new Error("Failed to save movie");
+    }
+}
+
+// remove saved movie
+export const unsaveMovie = async () => {
+    try {
+        
+    } catch (error) {
+        console.error("unsaveMovie error:", error);
+        throw new Error("Failed to unsave movie");
+    }
+}
