@@ -242,9 +242,33 @@ export const saveMovie = async (userId: string, movie: Movie) => {
 }
 
 // remove saved movie
-export const unsaveMovie = async () => {
+export const unsaveMovie = async (userId: string, movieId: string) => {
     try {
         
+        // önce bu kullanıcıya ait movie_id var mı kontrol et
+        const existing = await databases.listDocuments(
+            appwriteConfig.databaseId,
+            appwriteConfig.savedMoviesTableId,
+            [
+                Query.equal("user_id", userId),
+                Query.equal("movie_id", movieId)
+            ]
+        );
+
+        if(existing.documents.length === 0) {
+            return null; //zaten kaydedilmemiş
+        }
+
+        const docId = existing.documents[0].$id;
+
+        await databases.deleteDocument(
+            appwriteConfig.databaseId,
+            appwriteConfig.savedMoviesTableId,
+            docId,
+        );
+
+        return true;
+
     } catch (error) {
         console.error("unsaveMovie error:", error);
         throw new Error("Failed to unsave movie");
