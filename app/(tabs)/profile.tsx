@@ -4,14 +4,17 @@ import { account, updateUserProfile, userUpdateAvatar } from '@/services/appwrit
 import useAuthStore from '@/store/auth.store';
 import * as ImagePicker from "expo-image-picker";
 import { router } from 'expo-router';
-import React, { useCallback } from 'react';
-import { ActivityIndicator, Alert, Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import React, { useCallback, useState } from 'react';
+import { ActivityIndicator, Alert, Image, Modal, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 
 const profile = () => {
 
   const { user , setUser, setIsAuthenticated, isLoading, setLoading} = useAuthStore();
+
+  const [isModalVisible, setModalVisible] = useState(false);
+  const [newName, setNewName] = useState(user?.name || "");
 
   const handleAvatarChange = useCallback(async () => {
     try {
@@ -58,23 +61,23 @@ const profile = () => {
   const handleEditProfile = useCallback( async () => {
     try {
       
-      const newName = prompt("Enter your new name:", user?.name);
+      if(!newName.trim()){
+        Alert.alert("Error", "Name cannot be empty");
+        return;
+      }
 
-      if(!newName) return;
-      
       setLoading(true);
 
-      // User Null Check
-      if (!user) {
+      if(!user) {
         Alert.alert("Error", "User not found");
         setLoading(false);
         return;
       }
 
-      const updatedUser = await updateUserProfile(user.$id, newName)
+      const updatedUser = await updateUserProfile(user.$id, newName);
       setUser(updatedUser as unknown as User);
-
-      Alert.alert("Success", "Profile information updated!");
+      Alert.alert("Success", "Your profile has been updated!");
+      setModalVisible(false); 
 
   } catch (error: any) {
       console.error("Edit Profile Error:", error);
@@ -82,7 +85,7 @@ const profile = () => {
   } finally {
       setLoading(false);
   }
-  },[user])
+  },[newName, user])
 
   const handleLogout = useCallback(async () => {
     try {
@@ -178,7 +181,7 @@ const profile = () => {
           {/* Edit Profile Button */}
           <TouchableOpacity 
             className='editProfile-btn'
-            onPress={handleEditProfile}
+            onPress={() => setModalVisible(true)}
           >
             <Image source={icons.edit} className='size-4' tintColor="#AB8BFF"/>
             <Text className='editProfile-btn-text'>Edit Profile</Text>
@@ -195,6 +198,41 @@ const profile = () => {
         </View>
 
       </ScrollView>
+
+      {/* Modal */}
+      <Modal visible={isModalVisible} transparent animationType='fade'>
+        <View className='flex-1 bg-black/50 items-center justify-center'>
+          <View className='bg-secondary w-4/5 p-6 rounded-2xl'>
+            <Text className='text-lg text-light-100 font-lexend-semibold mb-2'>Edit your name</Text>
+
+            <TextInput 
+              value={newName}
+              onChangeText={setNewName}
+              placeholder='Enter new name'
+              placeholderTextColor='#999'
+              className='bg-dark_accent text-white rounded-xl p-3 mb-4'
+            />
+
+            <View className='flex-row justify-between'>
+              {/* Save */}
+              <TouchableOpacity
+                className='bg-accent p-3 rounded-xl w-[48%] items-center'
+                onPress={handleEditProfile}
+              >
+                <Text className='text-white font-lexend-semibold'>Save</Text>
+              </TouchableOpacity>
+
+              {/* Cancel */}
+              <TouchableOpacity
+                className='bg-light-100 p-3 rounded-xl w-[48%] items-center'
+                onPress={() => setModalVisible(false)}
+              >
+                <Text className='text-dark_accent font-lexend-semibold'>Cancel</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      </Modal>
     </SafeAreaView>
   )
 }
