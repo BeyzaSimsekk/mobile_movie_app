@@ -8,6 +8,7 @@ const appwriteConfig ={
     databaseId: process.env.EXPO_PUBLIC_APPWRITE_DATABASE_ID!,
     platform: "com.byz.molixapp",
     metricsTableId: process.env.EXPO_PUBLIC_APPWRITE_METRICS_TABLE_ID!,
+    savedMoviesTableId: process.env.EXPO_PUBLIC_APPWRITE_SAVED_MOVIES_TABLE_ID!,
     userTableId:process.env.EXPO_PUBLIC_APPWRITE_USER_TABLE_ID!,
     bucketId:process.env.EXPO_PUBLIC_APPWRITE_STORAGE_ID!
 }
