@@ -1,16 +1,65 @@
 import { icons } from '@/constants/icons'
 import { Movie } from '@/interfaces/interfaces'
+import { getSavedMovies, saveMovie, unsaveMovie } from '@/services/appwrite'
+import useAuthStore from '@/store/auth.store'
 import FontAwesome from '@expo/vector-icons/FontAwesome'
 import { Link } from 'expo-router'
-import { useState } from 'react'
-import { Image, Text, TouchableOpacity, View } from 'react-native'
+import { useEffect, useState } from 'react'
+import { Alert, Image, Text, TouchableOpacity, View } from 'react-native'
 
 const MovieCard = ({id, poster_path, title, vote_average, release_date}:Movie) => {
 
     const [isSaved, setIsSaved] = useState(false);
+    const { user , isAuthenticated} = useAuthStore();
+    const [loading, setLoading] = useState(false);
 
-    const handleSaveToggle = () => {
-        setIsSaved(!isSaved);
+
+    // Kullanıcının bu filmi kaydedip kaydetmediğini kontrol et
+    useEffect(() => {
+        const checkSaved = async () => {
+        if (!user) return;
+        try {
+            const savedMovies = await getSavedMovies(user.$id);
+            const found = savedMovies.find(movie => movie.movie_id === id);
+            setIsSaved(!!found);
+        } catch (error) {
+            console.log("Error checking saved movie:", error);
+        }
+        };
+
+        checkSaved();
+    }, [user, id]);
+
+    const handleSaveToggle = async () => {
+        
+        if(!isAuthenticated || !user) {
+            Alert.alert('Please sign in','You must be logged in to save a movie.');
+            return;
+        }
+
+        if (loading) return; // multiple click önlemek için
+
+        setLoading(true);
+
+        try {
+            
+            if (isSaved) {
+                // Film kaydedilmiş, şimdi sil
+                await unsaveMovie(user.$id, id.toString());
+                setIsSaved(false);
+            } else {
+                // Film kaydedilmemiş, şimdi kaydet
+                await saveMovie(user.$id, { id, title, vote_average, release_date, poster_path } as Movie);
+                setIsSaved(true);
+            }
+
+        } catch (error) {
+            console.error("Save Toggle Error:", error);
+            Alert.alert('Error', 'Something went wrong while updating your saved movies.')
+        } finally {
+            setLoading(false);
+        }
+
     }
 
   return (
@@ -30,7 +79,10 @@ const MovieCard = ({id, poster_path, title, vote_average, release_date}:Movie) =
 
                 {/* Save Icon */}
                 <TouchableOpacity
-                    onPress={handleSaveToggle}
+                    onPress={(e) => {
+                        e.stopPropagation(); 
+                        handleSaveToggle();
+                    }}
                     className='absolute top-2 right-2'
                 >
                     <FontAwesome name="bookmark" size={25} color={isSaved ? '#FF9333' : 'white'}/>

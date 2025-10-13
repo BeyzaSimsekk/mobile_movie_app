@@ -1,4 +1,4 @@
-import { CreateUserParams, Movie, SignInParams, TrendingMovie } from "@/interfaces/interfaces";
+import { CreateUserParams, Movie, SavedMovie, SignInParams, TrendingMovie } from "@/interfaces/interfaces";
 import { Account, Avatars, Client, Databases, ID, Query, Storage } from "react-native-appwrite";
 
 // track the searches made by a user
@@ -216,7 +216,7 @@ export const userUpdateAvatar = async (userId: string, imageUri: string) => {
 }
 
 // save movie
-export const saveMovie = async (userId: string, movie: Movie) => {
+export const saveMovie = async (userId: string, movie: Movie) : Promise<SavedMovie>=> {
     try {
         
         const saved = await databases.createDocument(
@@ -233,7 +233,7 @@ export const saveMovie = async (userId: string, movie: Movie) => {
             }
         );
 
-        return saved;
+        return saved as unknown as SavedMovie;
 
     } catch (error) {
         console.error("saveMovie error:",error);
@@ -251,7 +251,7 @@ export const unsaveMovie = async (userId: string, movieId: string) => {
             appwriteConfig.savedMoviesTableId,
             [
                 Query.equal("user_id", userId),
-                Query.equal("movie_id", movieId)
+                Query.equal("movie_id", Number(movieId))
             ]
         );
 
@@ -276,7 +276,7 @@ export const unsaveMovie = async (userId: string, movieId: string) => {
 }
 
 // get saved movies
-export const getSavedMovies = async (userId: string) => {
+export const getSavedMovies = async (userId: string) : Promise<SavedMovie[]> => {
     try {
         
         const result = await databases.listDocuments(
@@ -287,7 +287,7 @@ export const getSavedMovies = async (userId: string) => {
             ]
         );
 
-        return result.documents as unknown as Movie[];
+        return result.documents as unknown as SavedMovie[];
         
     } catch (error) {
         console.error("unsaveMovie error:", error);

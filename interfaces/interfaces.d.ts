@@ -25,6 +25,16 @@ interface TrendingMovie {
   poster_url: string;
 }
 
+interface SavedMovie {
+  $id: string;        // Appwrite doküman kimliği
+  user_id: string;
+  movie_id: number;
+  title: string;
+  vote_average: number;
+  release_date: string;
+  poster_url: string;
+}
+
 interface MovieDetails {
   adult: boolean;
   backdrop_path: string | null;
