@@ -1,5 +1,5 @@
 import { icons } from '@/constants/icons'
-import { Movie } from '@/interfaces/interfaces'
+import { Movie, MovieCardProps } from '@/interfaces/interfaces'
 import { getSavedMovies, saveMovie, unsaveMovie } from '@/services/appwrite'
 import useAuthStore from '@/store/auth.store'
 import FontAwesome from '@expo/vector-icons/FontAwesome'
@@ -7,7 +7,7 @@ import { Link } from 'expo-router'
 import { useEffect, useState } from 'react'
 import { Alert, Image, Text, TouchableOpacity, View } from 'react-native'
 
-const MovieCard = ({id, poster_path, title, vote_average, release_date}:Movie) => {
+const MovieCard = ({id, poster_path, title, vote_average, release_date}:MovieCardProps) => {
 
     const [isSaved, setIsSaved] = useState(false);
     const { user , isAuthenticated} = useAuthStore();

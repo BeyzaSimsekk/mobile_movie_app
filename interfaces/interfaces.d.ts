@@ -17,6 +17,14 @@ interface Movie {
   vote_count: number;
 }
 
+interface MovieCardProps {
+  id: number;
+  title: string;
+  poster_path: string;
+  vote_average: number;
+  release_date: string;
+}
+
 interface TrendingMovie {
   searchTerm: string;
   movie_id: number;

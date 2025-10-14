@@ -56,6 +56,9 @@
   .header-trending {
     @apply text-3xl text-white mb-3 font-lexend-bold;
   }
+  .header-saved {
+    @apply text-3xl text-white mb-4 font-lexend-bold text-center;
+  }
   .movie_details-title {
     @apply text-white font-lexend-bold text-3xl;
   }
